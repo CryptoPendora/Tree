@@ -1,0 +1,33 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  server-warrior:
+    container_name: server-warrior-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /app/shared
+    command: ["/app/ServerHeartbeatWarriors"]
+    # command: ["./ServerHeartbeatWarriors"]
+    restart: on-failure
+
+  reader-warrior:
+    container_name: reader-warrior-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /app/shared
+    command: ["/app/ReaderHeartbeatWarriors"]
+    # command: ["./ReaderHeartbeatWarriors"]
+    restart: on-failure
+
+volumes:
+  heartbeat-data:
+

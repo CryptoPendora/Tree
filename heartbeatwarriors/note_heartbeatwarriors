@@ -1,0 +1,31 @@
+docker-compose up --build
+
+if failed
+docker-compose build --no-cache
+
+
+docker build -t inmemorysqlmanager .
+
+docker run -d -p 8080:8080 inmemorysqlmanager
+
+docker run -d inmemorysqlmanager
+
+docker-compose up --build
+docker-compose up --force-recreate
+
+for /F %i in ('docker images -a -q') do docker rmi -f %i
+
+Rebuild your Docker image with docker build -t inmemorysqlmanager ..
+Run your container again with docker-compose up --force-recreate.
+
+docker exec -it <container_id_or_name> bash
+
+docker exec -it server-warrior-container bash
+docker exec -it reader-warrior-container bash
+
+
+apt install sqlite3
+
+sqlite3 exported.db
+
+SELECT * FROM products;
